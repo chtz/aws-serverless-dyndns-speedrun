@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "hash.js": "^1.1.7"
+  },
+  "devDependencies": {
+    "serverless-api-gateway-throttling": "^1.0.1"
+  }
+}

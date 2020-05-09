@@ -1,0 +1,45 @@
+service: dynDnsSpeedrun 
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage, 'dev'}
+  environment:
+    apiSecret: ${file(config.${self:provider.stage}.yml):apiSecret}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "route53:ChangeResourceRecordSets"
+      Resource: !Join
+        - ""
+        - - "arn:aws:route53:::hostedzone/"
+          - !Ref HostedZone
+
+plugins:
+  - serverless-api-gateway-throttling
+
+custom:
+  apiGatewayThrottling:
+    maxRequestsPerSecond: 10
+    maxConcurrentRequests: 3
+
+functions:
+  dnsupdate:
+    handler: handler.dnsupdate
+    events:
+      - http:
+          path: dnsupdate
+          method: get
+    environment:
+      hostedZoneId: !Ref HostedZone
+      domain: ${file(config.${self:provider.stage}.yml):domain}
+
+  hostSecret:
+    handler: handler.hostSecret
+
+resources:
+  Resources:
+    HostedZone:
+      Type: AWS::Route53::HostedZone
+      Properties:
+        Name: ${file(config.${self:provider.stage}.yml):domain}
