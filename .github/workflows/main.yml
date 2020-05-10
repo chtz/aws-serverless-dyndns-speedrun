@@ -16,7 +16,8 @@ jobs:
     - name: Create config file
       run: |
         pwd
-        echo $AWS_ACCESS_KEY_ID
+        echo Access $AWS_ACCESS_KEY_ID
+        env
         echo "apiSecret: $apiSecret" > config.dev.yml
         echo "domain: $domain" >> config.dev.yml
         ls -la
