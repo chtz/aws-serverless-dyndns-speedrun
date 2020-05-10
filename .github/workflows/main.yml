@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12'
-    - name: Create config file
+    - name: serverless environment config
       shell: bash
       env:
         API_SECRET: ${{ secrets.apiSecret }}
@@ -21,8 +21,7 @@ jobs:
       run: |
         echo "apiSecret: $API_SECRET" > config.dev.yml
         echo "domain: $DOMAIN" >> config.dev.yml
-        cat config.dev.yml
-    - name: serverless install
+    - name: serverless plugin install
       uses: serverless/github-action@v1.53.0
       with:
         args: plugin install --name serverless-api-gateway-throttling
