@@ -13,10 +13,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12'
-    - name: Moving build to artifacts directory
+    - name: Create config file
       run: |
+        pwd
+        echo $AWS_ACCESS_KEY_ID
         echo "apiSecret: $apiSecret" > config.dev.yml
         echo "domain: $domain" >> config.dev.yml
+        ls -la
     - name: serverless install
       uses: serverless/github-action@v1.53.0
       with:
