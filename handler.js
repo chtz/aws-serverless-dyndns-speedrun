@@ -14,8 +14,7 @@ module.exports.hostSecret = async (data) => {
   return hostSecret(data);
 };
 
-//sample: curl 'https://8frxdiukq0.execute-api.us-east-1.amazonaws.com/dev/dnsupdate?l=willi&i=127.0.0.3&h=www2&p=...'
-//fritz box:    https://8frxdiukq0.execute-api.us-east-1.amazonaws.com/dev/dnsupdate?i=<ipaddr>&l=<username>&p=<pass>&h=<domain>
+//sample fritz box config: https://8frxdiukq0.execute-api.us-east-1.amazonaws.com/dev/dnsupdate?i=<ipaddr>&l=<username>&p=<pass>&h=<domain>
 module.exports.dnsupdate = async (event) => { 
   const ip = event.queryStringParameters.i;
   const user = event.queryStringParameters.l;

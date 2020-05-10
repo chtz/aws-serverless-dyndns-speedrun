@@ -20,8 +20,8 @@ plugins:
 
 custom:
   apiGatewayThrottling:
-    maxRequestsPerSecond: 10
-    maxConcurrentRequests: 3
+    maxRequestsPerSecond: 5
+    maxConcurrentRequests: 2
 
 functions:
   dnsupdate:
