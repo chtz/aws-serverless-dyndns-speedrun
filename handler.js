@@ -8,13 +8,12 @@ function hostSecret(host) {
   return hash.sha256().update(process.env.apiSecret + host).digest('hex')
 }
 
-//sample: sls invoke -f hostSecret -d "www2"
+//sample: sls invoke -f hostSecret -d "home"
 module.exports.hostSecret = async (data) => { 
-  console.log(hostSecret('www2'));
   return hostSecret(data);
 };
 
-//sample fritz box config: https://8frxdiukq0.execute-api.us-east-1.amazonaws.com/dev/dnsupdate?i=<ipaddr>&l=<username>&p=<pass>&h=<domain>
+//sample fritz box config: https://4a5irq1h29.execute-api.eu-central-1.amazonaws.com/dev/dnsupdate?i=<ipaddr>&l=<username>&p=<pass>&h=<domain>
 module.exports.dnsupdate = async (event) => { 
   const ip = event.queryStringParameters.i;
   const user = event.queryStringParameters.l;

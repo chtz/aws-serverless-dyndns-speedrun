@@ -7,3 +7,6 @@ jspm_packages
 
 
 config.dev.yml
+config.dev.yml.old
+env.sh
+info.txt
